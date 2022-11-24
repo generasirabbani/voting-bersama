@@ -33,6 +33,12 @@ p {
     padding: 0px 6px;
 }
 
+.p-subtitlee{
+  color : red;
+  font-size: 18px;
+  font-weight: 500;
+}
+
 
 h1{
     color: blue;
@@ -116,5 +122,5 @@ hr{
 .login-help {
   width: 100%;
   text-align: center;
-  font-size: 12px;
+  font-size: 15px;
 }
