@@ -8,17 +8,21 @@ Repo ini merupakan tugas akhir dari mata kuliah KOM20F Basisdata untuk membuat a
   <tr>
     <th>Nama</th>
     <th>NIM</th>
-  </tr>
-  <tr>
-    <td>Rafif Rabbani</td>
-    <td>G6401211018</td>
+    <th>Pembagian Tugas</th>
   </tr>
   <tr>
     <td>Dwi Putra Prayoga Sulaeman</td>
     <td>G6401211040</td>
+    <th>Frontend, Backend, ERD</th>
   </tr>
   <tr>
     <td>Mike Jared Gunawan</td>
     <td>G6401211149</td>
+    <th>Frontend, Backend</th>
+  </tr>
+  <tr>
+    <td>Rafif Rabbani</td>
+    <td>G6401211018</td>
+    <th>Laporan, ERD, Diagram Skematik</th>
   </tr>
 </table>
