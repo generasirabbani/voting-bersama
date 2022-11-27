@@ -13,16 +13,16 @@ Repo ini merupakan tugas akhir dari mata kuliah KOM20F Basisdata untuk membuat a
   <tr>
     <td>Dwi Putra Prayoga Sulaeman</td>
     <td>G6401211040</td>
-    <th>Frontend, Backend, ERD</th>
+    <td>Frontend, Database Designer, dan Backend.</td>
   </tr>
   <tr>
     <td>Mike Jared Gunawan</td>
     <td>G6401211149</td>
-    <th>Frontend, Backend</th>
+    <td>Frontend, Database Manager, dan Backend.</td>
   </tr>
   <tr>
     <td>Rafif Rabbani</td>
     <td>G6401211018</td>
-    <th>Laporan, ERD, Diagram Skematik</th>
+    <td>Database Designer, Report Maker, dan Powerpoint Maker.</td>
   </tr>
 </table>
