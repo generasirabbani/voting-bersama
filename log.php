@@ -1,12 +1,33 @@
 <?php
 include("config.php");
+session_start();
+if(isset($_SESSION['email'])){
+    header("Location: beranda.php");
+    exit;
+}
+elseif(isset($_SESSION['user'])){
+    header("Location: berandaadmin.php");
+    exit;
+}
 if(isset($_POST['login'])&&!empty($_POST['login'])){
     $hashpassword = md5($_POST['pass']);
+    $password = $_POST['pass'];
     $data = pg_query("select * from pengguna where email = '".pg_escape_string($_POST['email'])."' and password ='".$hashpassword."'"); 
-    $login_check = pg_num_rows($data);
-    if($login_check > 0){ 
+    $data1 = pg_query("select * from admin where username = '".pg_escape_string($_POST['email'])."' and password ='".$password."'"); 
+    $login_check = pg_num_rows($data); 
+    $admin_check = pg_num_rows($data1);
+    if($login_check > 0){
+        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['token'] = pg_fetch_array($data)['token']; 
+        $_SESSION['cek'] = pg_fetch_array($data)['cek']; 
         header('Location: beranda.php');
-    }else{
+    }
+    elseif($admin_check > 0){
+      $_SESSION['username'] = $_POST['email'];
+      $_SESSION['token'] = pg_fetch_array($data1)['token'];
+      header('Location: berandaadmin.php');
+    }
+    else{
         header('Location: log.php?status=gagal');
     }
 }

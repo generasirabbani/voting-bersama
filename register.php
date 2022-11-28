@@ -1,19 +1,28 @@
 <?php
 include("config.php");
+session_start();
+if(isset($_SESSION['email'])){
+    header("Location: beranda.php");
+    exit;
+}
+elseif(isset($_SESSION['user'])){
+    header("Location: berandaadmin.php");
+    exit;
+}
 if(isset($_POST['regis'])&&!empty($_POST['regis'])){
 	$nama = $_POST['nama'];
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 	$passwordjuga = $_POST['passwordjuga'];
   $token = $_POST['token'];
-  $check = pg_query("SELECT token from token where token = '$token' ");
+  $check = pg_query("SELECT token from admin where token = '$token' ");
   if(empty($nama) || empty($email) || empty($password) || empty($token)){
     header('Location: register.php?status=empty');
   }else if($password != $passwordjuga || pg_num_rows($check) == 0){
     header('Location: register.php?status=gasama');
   }else{
     $hashpassword = md5($password);
-      $query = pg_query("INSERT INTO pengguna (nama, email, password, token) VALUEs ('$nama', '$email', '$hashpassword','$token')");
+    $query = pg_query("INSERT INTO pengguna (nama, email, password, token, cek) VALUEs ('$nama', '$email', '$hashpassword','$token', 'FALSE')");
     if($query == TRUE) {
       header('Location: log.php');
     } else {

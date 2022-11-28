@@ -1,19 +1,33 @@
 -buat database
 create database votingbersama
 
--buat table
+-buat tabel user
 create table pengguna (
 nama varchar(255) not null,
 email varchar(255) not null,
 password varchar(255) not null,
-token varchar(255) not null
+token varchar(255) not null,
+cek bool not null,
 constraint email_pk primary key(email)
  );
 
-create table token (
+create table admin(
+username varchar(255) not null,
+password varchar(255) not null,
 token varchar(255) not null,
 constraint token_pk primary key(token)
 );
 
+create table kandidat(
+IDkandidat varchar(255) not null,
+nama varchar(255) not null,
+alasan varchar(255) not null,
+visi varchar(255) not null,
+misi varchar(255) not null,
+token varchar(255) not null,
+jumlah suara INT not null,
+constraint IDkandidat_pk primary key(IDkandidat)
+);
+
 -nambahin token
-insert into token (token) values ('hehe');
+insert into token (username, password, token) values ('');
