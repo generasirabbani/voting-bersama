@@ -1,11 +1,18 @@
 <?php
     include("config.php");
     session_start();
-    if(!isset($_SESSION['email'])&&!isset($_SESSION['username'])){
-        header("Location: log.php");
+    if(isset($_SESSION['email'])){
+        $data = pg_query("SELECT * from pengguna where email = '".$_SESSION['email']."'");
+        $hehe = pg_fetch_array($data);
+        $_SESSION['block'] = $hehe['block'];
+    }
+    $data2 = pg_query("SELECT * from admin where token = '".$_SESSION['token']."'");
+    $hehehe = pg_fetch_array($data2);
+    $_SESSION['start'] = $hehehe['start']; 
+    if((!isset($_SESSION['email'])||$_SESSION['block'] == 't')&&!isset($_SESSION['username'])){
+        header("Location: logout.php");
         exit;
     }
-
 ?>
 <head>
     <meta charset="UTF-8">
@@ -32,7 +39,9 @@
         <ul class="navbar">
             <li><a href="berandaadmin.php" class="dropdown">Home</a></li>
             <li><a href="tambahkandidat.php">Tambah kandidat </a></li>
-            <li><a href="livecount.php">Live Count </a></li>	
+            <li><a href="livecount.php">Live Count </a></li>
+            <li><a href="listadmin.php">List Admin </a></li>
+            <li><a href="listvoter.php">List Voter </a></li>
         </ul>
             <p>|</p>
             <a href="logout.php" class="tombolLogout">Log out</a>
@@ -57,10 +66,15 @@
 		<?php
         $i = 1;
 		$query = pg_query("SELECT * FROM kandidat where token = '".$_SESSION['token']."' order by nama asc");
-        $count = pg_query("SELECT SUM(jumlahsuara) FROM kandidat");
+        $count = pg_query("SELECT SUM(jumlahsuara) FROM kandidat where token = '".$_SESSION['token']."'");
         $count = pg_fetch_array($count);
 		while($kandidat = pg_fetch_array($query)){
-			$persen = 100.0*$kandidat['jumlahsuara']/$count[0];
+            if($count[0] > 0){
+			    $persen = 100.0*$kandidat['jumlahsuara']/$count[0];
+            }
+            else{
+                $persen = 0;
+            }
             echo "<tr>";
 			echo "<td>".$i."</td>";
 			echo "<td>".$kandidat['nama']."</td>";

@@ -8,6 +8,7 @@ email varchar(255) not null,
 password varchar(255) not null,
 token varchar(255) not null,
 cek bool not null,
+pilih varchar,
 constraint email_pk primary key(email)
  );
 
@@ -16,6 +17,13 @@ username varchar(255) not null,
 password varchar(255) not null,
 token varchar(255) not null,
 constraint token_pk primary key(token)
+);
+
+create table useradmin(
+idadmin varchar(255) not null,
+namaadmin varchar(255) not null,
+asal varchar(255) not null,
+constraint idadmin_pk primary key(idadmin)
 );
 
 create table kandidat(
@@ -30,4 +38,4 @@ constraint IDkandidat_pk primary key(IDkandidat)
 );
 
 -nambahin token
-insert into token (username, password, token) values ('');
+insert into useradmin (idadmin, nama, asal, token) values ('A001', 'Agung Santoso',  'KPU', 'hehe');

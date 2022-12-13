@@ -5,7 +5,6 @@
         header("Location: log.php");
         exit;
     }
-
 ?>
 <head>
     <meta charset="UTF-8">
@@ -21,6 +20,8 @@
 			<li><a href="berandaadmin.php" class="dropdown">Home</a></li>
             <li><a href="tambahkandidat.php">Tambah kandidat </a></li>
             <li><a href="livecount.php">Live Count </a></li>
+            <li><a href="listadmin.php">List Admin </a></li>
+            <li><a href="listvoter.php">List Voter </a></li>
         </ul>
         <div class="main">
             <span class="nyambutUser">Hi!  </span>
@@ -38,7 +39,7 @@
     while($kandidat = pg_fetch_array($query)){;?>
         <p><?php echo $i?></p>
         <p><?php echo $kandidat['nama']?></p>
-        <p><?php echo $kandidat['alasan']?></p>
+        <a href="<?php echo $kandidat['link']?>"><?php echo $kandidat['link']?></a>
         <p><?php echo $kandidat['visi']?></p>
         <p><?php echo $kandidat['misi']?></p>
         <form action = "" method = "POST">
@@ -60,6 +61,29 @@
             if(isset($_POST['edit'])){
                 header('Location: editkandidat.php');
             }
-            $i++;};
-        ?>
+            $i++;}
+            $query2 = pg_query("SELECT * from admin where token = '".$_SESSION['token']."'");
+            $voting = pg_fetch_array($query2);
+            if($voting['start'] == 'f'){;
+            ?>
+            <form action = "" method = "POST">
+            <input type="submit" name="start" class="login login-submit" value="start voting">
+            </form>
+            <?php
+                if(isset($_POST['start']) &&$voting['start'] == 'f'){
+                    $query3 = pg_query("UPDATE admin SET start = 'TRUE' WHERE token= '".$_SESSION['token']."'");
+                    header('Location: berandaadmin.php');
+                }
+            }else{;
+                ?>
+            <form action = "" method = "POST">
+            <input type="submit" name="stop" class="login login-submit" value="Stop">
+            </form>
+            <?php
+            if(isset($_POST['stop'])&&$voting['start'] == 't'){
+                    $query3 = pg_query("UPDATE admin SET start = 'FALSE' WHERE token= '".$_SESSION['token']."'");
+                    header('Location: berandaadmin.php');
+                }
+            }
+            ?>
 </body>

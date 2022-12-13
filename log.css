@@ -11,36 +11,6 @@ body {
     font-family: 'Raleway', sans-serif;
 }
 
-.nyambutUser {
-	color: #5A4FCF;
-	font-size: 16px;
-	cursor: pointer;
-	margin-left: 5px;
-	margin-right: 10px;
-	font-weight: 600;
-}
-
-.navbar{
-	display: flex;
-}
-
-.navbar a{
-	color: var(--text-color);
-	font-size: 1.1rem;
-	font-weight: 600;
-	padding: 5px 0;
-	margin: 0px 30px;
-	transition: all .50s ease;
-}
-
-.navbar a:hover{
-	color: var(--main-color);
-}
-
-.navbar a.active{
-	color: var(--main-color);
-}
-
 .login-card {
   padding: 40px;
   width: 400px;

@@ -8,21 +8,18 @@ if(!isset($_SESSION['username'])){
 if(isset($_POST['regis'])&&!empty($_POST['regis'])){
 	$ID = $_SESSION['id_edit'];
     $nama = $_POST['nama'];
-	$alasan = $_POST['alasan'];
+	$link = $_POST['link'];
 	$visi = $_POST['visi'];
 	$misi = $_POST['misi'];
   $token = $_SESSION['token'];
-  $check = pg_query("SELECT token from admin where token = '$token' ");
-  if(empty($nama) || empty($alasan) || empty($visi) ||empty($misi) || empty($token) ){
-    header('Location: tambahkandiat.php?status=empty');
-  }else if(pg_num_rows($check) == 0){
-    header('Location: register.php?status=gasama');
+  if(empty($nama) || empty($link) || empty($visi) || empty($misi) || empty($token) ){
+    header('Location: editkandidat.php?status=empty');
   }else{
-    $query = pg_query("UPDATE kandidat SET nama = '$nama', alasan = '$alasan', visi = '$visi', misi= '$misi' WHERE idkandidat='$ID'");
+    $query = pg_query("UPDATE kandidat SET nama = '$nama', link = '$link', visi = '$visi', misi= '$misi' WHERE idkandidat='$ID'");
     if($query) {
       header('Location: berandaadmin.php');
     } else {
-      header('Location: tambahkandiat.php?status=gagal');
+      header('Location: editkandidat.php?status=gagal');
     }
   }
 }
@@ -32,7 +29,7 @@ if(isset($_POST['regis'])&&!empty($_POST['regis'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
+    <title>Edit Kandidat</title>
     <link rel="stylesheet" href="log.css">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 </head>
@@ -40,15 +37,15 @@ if(isset($_POST['regis'])&&!empty($_POST['regis'])){
     <p>Edit Kandidat</p><hr><br><br>
   <form action = "" method = "POST">
     <input type="text" name="nama" placeholder="Nama Lengkap">
-    <input type="text" name="alasan" placeholder="Alasan Pencalonan">
+    <input type="text" name="link" placeholder="Link Grand Design">
     <input type="text" name="visi" placeholder="Visi">
     <input type="text" name="misi" placeholder="Misi">
-    <input type="submit" name="regis" class="login login-submit" value="Submit">
-    <?php if(isset($_GET['status']) && $_GET['status'] == 'gagal'): ?>
-      <p><span class="p-subtitlee">Kandidat sudah terdaftar</span> </p>
-    <?php endif; ?>
+    <input type="submit" name="regis" class="login login-submit" value="Edit">
     <?php if(isset($_GET['status']) && $_GET['status'] == 'empty'): ?>
       <p> <span class="p-subtitlee">ada yang kosong</span> </p>
+    <?php endif; ?>
+    <?php if(isset($_GET['status']) && $_GET['status'] == 'gagal'): ?>
+      <p> <span class="p-subtitlee">ada yang salah</span> </p>
     <?php endif; ?>
   </form>
 
