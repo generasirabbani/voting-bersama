@@ -53,6 +53,7 @@ if(isset($_POST['login'])&&!empty($_POST['login'])){
     <link rel="stylesheet" href="log.css">
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
 </head>
+<body>
 <div class="login-card">
     <p>
         Voting<span class="p-subtitle">Bersama</span><hr><br><br>
@@ -80,11 +81,6 @@ if(isset($_POST['login'])&&!empty($_POST['login'])){
   <?php if(isset($_GET['status']) && $_GET['status'] == 'terblock'): ?>
   <div> 
     <p><span class="p-subtitlee">Akun anda diblock, silahkan hubungi admin</span></p>
-  </div>
-  <?php endif; ?>
-  <?php if(isset($_GET['status']) && $_GET['status'] == 'regadminberhasil'): ?>
-  <div> 
-    <p><span class="p-subtitlee">Berhasil Membuat Akun Admin</span></p>
   </div>
   <?php endif; ?>
   <?php if(isset($_GET['status']) && $_GET['status'] == 'regadminberhasil'): ?>
